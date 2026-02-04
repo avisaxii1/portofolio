@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisa Deyana | Biochemistry Path</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ocean-blue: #0077b6;
+            --soft-blue: #caf0f8;
+            --ipb-blue: #004d95;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fdff;
+            color: #2d3436;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 2rem;
+        }
+
+        #fish-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--ocean-blue);
+            border-radius: 2px;
+        }
+
+        .photo-container {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border: 8px solid white;
+            box-shadow: 0 20px 40px rgba(0, 119, 182, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link:hover { color: var(--ocean-blue); transform: translateY(-2px); }
+        .content-section { position: relative; z-index: 10; padding: 5rem 1.5rem; }
+
+        .ipb-gradient {
+            background: linear-gradient(135deg, #004d95 0%, #0077b6 100%);
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #f1f5f9;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-style {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1rem;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        /* Timeline Styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-left: 2px dashed #bae6fd;
+        }
+        .timeline-item:last-child {
+            border-left: none;
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.65rem;
+            top: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: white;
+            border: 3px solid var(--ocean-blue);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="fish-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[100] px-6 py-5">
+        <div class="max-w-6xl mx-auto flex justify-between items-center glass-card px-8 py-4 shadow-sm">
+            <span class="font-serif text-2xl font-bold text-ocean-blue">Avisa.</span>
+            <div class="hidden md:flex space-x-6 font-semibold text-xs tracking-widest text-slate-500 uppercase">
+                <a href="#home" class="nav-link transition-all">Beranda</a>
+                <a href="#about" class="nav-link transition-all">Tentang</a>
+                <a href="#education" class="nav-link transition-all">Pendidikan</a>
+                <a href="#skills" class="nav-link transition-all">Keahlian</a>
+                <a href="#experience" class="nav-link transition-all">Organisasi</a>
+                <a href="#contact" class="nav-link transition-all">Kontak</a>
+            </div>
+            <div class="text-ocean-blue flex gap-4">
+                <a href="https://instagram.com/avisa.dyn" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/6281214558598" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 0. Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative z-10">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center px-6">
+            <div class="space-y-6 text-left">
+                <div class="inline-block bg-blue-100 text-ocean-blue px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">
+                    Future Biochemist
+                </div>
+                <h1 class="text-6xl md:text-8xl font-serif font-bold text-slate-800 leading-tight">
+                    Avisa <br> <span class="text-ocean-blue italic">Deyana.</span>
+                </h1>
+                <p class="text-lg text-slate-500 max-w-md leading-relaxed">
+                    Siswi kelas 12 <span class="text-slate-900 font-semibold">SMAN 1 Subang</span>. Berdedikasi untuk mengeksplorasi dunia sains dan bercita-cita menjadi ahli biokimia masa depan.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://instagram.com/avisa.dyn" target="_blank" class="glass-card px-6 py-3 flex items-center gap-2 font-bold text-sm hover:bg-white transition-all">
+                        <i class="fab fa-instagram text-pink-500"></i> @avisa.dyn
+                    </a>
+                    <a href="https://wa.me/6281214558598" target="_blank" class="glass-card px-6 py-3 flex items-center gap-2 font-bold text-sm hover:bg-white transition-all">
+                        <i class="fab fa-whatsapp text-green-500"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="w-full max-w-sm aspect-[3/4] rounded-[4rem] photo-container">
+                    <img src="https://1drv.ms/i/c/29c6700cfa5df3e6/IQDuPGCZ7Ly7Tobb7HRYqiahAcclL9n7ylPvEh24qrQsLsU?e=XoguSB" alt="Foto Avisa Deyana" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-8 -right-4 glass-card p-6 shadow-xl border-l-8 border-ocean-blue text-left">
+                    <p class="text-xs font-bold text-ocean-blue uppercase tracking-widest">Lahir</p>
+                    <p class="text-2xl font-bold">26 Jan 2009</p>
+                    <p class="text-[10px] text-slate-400 italic font-medium">Subang, Jawa Barat</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Tentang Saya -->
+    <section id="about" class="content-section">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">1. Profil & Karakter</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 glass-card p-8 md:p-12 space-y-6">
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Sebagai seorang <span class="font-bold text-ocean-blue">INFJ</span>, saya memiliki perpaduan antara empati yang tinggi dan ketelitian dalam bekerja. Saya sangat menghargai struktur, namun tetap fleksibel dalam menghadapi tantangan baru.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        Ketertarikan saya pada biokimia muncul dari rasa ingin tahu yang besar tentang bagaimana kehidupan bekerja pada tingkat molekuler. Saya percaya bahwa sains adalah cara terbaik untuk memberikan dampak positif bagi dunia.
+                    </p>
+                </div>
+                <div class="glass-card p-8 bg-blue-50/50 flex flex-col justify-center text-center">
+                    <div class="text-4xl mb-4">🧬</div>
+                    <h4 class="font-bold text-slate-800">Cita-cita</h4>
+                    <p class="text-ocean-blue font-bold text-xl mt-2">Ahli Biokimia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Riwayat Pendidikan (DITAMBAHKAN KEMBALI) -->
+    <section id="education" class="content-section bg-slate-50/50">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">2. Riwayat Pendidikan</h2>
+            <div class="glass-card p-10 md:p-12">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-slate-800">SMAN 1 Subang</h4>
+                        <p class="text-ocean-blue font-semibold text-sm">Sekolah Menengah Atas (2023 - Sekarang)</p>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Saat ini duduk di kelas 12, aktif dalam berbagai organisasi ilmiah dan sosial untuk mempersiapkan diri menuju perguruan tinggi.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-slate-800">SMPN 1 Subang</h4>
+                        <p class="text-slate-500 font-semibold text-sm">Sekolah Menengah Pertama</p>
+                        <p class="text-slate-400 mt-2 text-sm italic">Fase eksplorasi minat dan bakat dalam berorganisasi.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-slate-800">SDN Dewi Sartika</h4>
+                        <p class="text-slate-500 font-semibold text-sm">Sekolah Dasar</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="text-xl font-bold text-slate-800">TK Cempaka</h4>
+                        <p class="text-slate-500 font-semibold text-sm">Taman Kanak-Kanak</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Keahlian -->
+    <section id="skills" class="content-section">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">3. Keahlian & Kompetensi</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Soft Skills -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i class="fas fa-users text-ocean-blue"></i> Soft Skill
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-tag"><i class="fas fa-handshake text-blue-400"></i> Kerja Sama Tim</div>
+                        <div class="skill-tag"><i class="fas fa-bullseye text-red-400"></i> Mengikuti Arahan</div>
+                        <div class="skill-tag"><i class="fas fa-bolt text-yellow-400"></i> Adaptasi Cepat</div>
+                        <div class="skill-tag"><i class="fas fa-comments text-green-400"></i> Komunikasi Efektif</div>
+                        <div class="skill-tag"><i class="fas fa-brain text-purple-400"></i> Problem Solving</div>
+                    </div>
+                </div>
+                <!-- Hard Skills -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                        <i class="fas fa-flask text-ocean-blue"></i> Hard Skill
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-tag"><i class="fas fa-vial text-blue-500"></i> Teknik Laboratorium</div>
+                        <div class="skill-tag"><i class="fas fa-microscope text-indigo-500"></i> Analisis Biologi</div>
+                        <div class="skill-tag"><i class="fas fa-pen-fancy text-slate-500"></i> Penulisan Ilmiah</div>
+                        <div class="skill-tag"><i class="fas fa-laptop text-gray-500"></i> Microsoft Office</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Ekstrakurikuler -->
+    <section id="experience" class="content-section bg-slate-50/50">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">4. Aktivitas Organisasi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 flex items-center space-x-6 hover:shadow-lg transition-all border-l-4 border-blue-600">
+                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl"><i class="fas fa-flask"></i></div>
+                    <div><h4 class="font-bold text-lg">KIR</h4><p class="text-xs text-slate-400 uppercase tracking-widest">Kelompok Ilmiah Remaja</p></div>
+                </div>
+                <div class="glass-card p-6 flex items-center space-x-6 hover:shadow-lg transition-all border-l-4 border-red-500">
+                    <div class="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center text-white text-2xl"><i class="fas fa-hand-holding-medical"></i></div>
+                    <div><h4 class="font-bold text-lg">PMR</h4><p class="text-xs text-slate-400 uppercase tracking-widest">Palang Merah Remaja</p></div>
+                </div>
+                <div class="glass-card p-6 flex items-center space-x-6 hover:shadow-lg transition-all border-l-4 border-emerald-500">
+                    <div class="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white text-2xl"><i class="fas fa-pen-nib"></i></div>
+                    <div><h4 class="font-bold text-lg">SASTRASIA</h4><p class="text-xs text-slate-400 uppercase tracking-widest">Sastra Indonesia</p></div>
+                </div>
+                <div class="glass-card p-6 flex items-center space-x-6 hover:shadow-lg transition-all border-l-4 border-yellow-500">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl"><i class="fas fa-music"></i></div>
+                    <div><h4 class="font-bold text-lg">BAMBOESPENSA</h4><p class="text-xs text-slate-400 uppercase tracking-widest">Angklung & Seni Budaya</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Inspirasi -->
+    <section id="inspiration" class="content-section bg-pink-50/30">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">5. Tokoh Inspiratif</h2>
+            <div class="glass-card p-8 md:p-12 flex flex-col md:flex-row items-center gap-10">
+                <div class="w-48 h-48 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white flex-shrink-0">
+                    <img src="https://1drv.ms/i/c/29c6700cfa5df3e6/IQAoUAQ3XBRDRJHP4Gm_dArHAbfxKwXwbUGAPkoZTn0WU3M?e=58Til4" alt="Jennie Blackpink" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-3xl font-serif font-bold text-slate-800">Jennie Blackpink</h3>
+                    <p class="text-lg text-slate-600 leading-relaxed italic">
+                        "Jennie menginspirasi saya tentang dedikasi dan profesionalisme. Keberaniannya untuk terus berinovasi memotivasi saya untuk berani bermimpi menjadi ahli biokimia yang handal."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Impian -->
+    <section id="dreams" class="content-section">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">6. Impian & Motivasi</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="ipb-gradient p-10 rounded-[3rem] text-white shadow-2xl flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute -right-8 -top-8 text-white/10 text-9xl transform group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-[0.3em] mb-2 opacity-80 text-left">Peta Jalan Masa Depan</h3>
+                        <p class="text-3xl md:text-4xl font-serif font-bold leading-tight text-left">
+                            Menjadi Mahasiswa <br>Biokimia di <br>IPB University
+                        </p>
+                    </div>
+                    <p class="mt-8 text-sm opacity-90 italic text-left">"Sains adalah kunci untuk memahami keajaiban kehidupan."</p>
+                </div>
+
+                <div class="glass-card p-10 flex flex-col justify-center items-center text-center">
+                    <h3 class="text-xs font-bold text-ocean-blue uppercase tracking-widest mb-6">Prinsip Hidup</h3>
+                    <p class="text-2xl font-serif italic font-semibold text-slate-800 leading-relaxed">
+                        "Setiap langkah kecil hari ini adalah jembatan menuju mimpi besar esok hari. Percaya pada prosesnya."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Pesan & Kontak -->
+    <section id="contact" class="content-section pb-32">
+        <div class="max-w-4xl mx-auto text-left">
+            <h2 class="section-title">7. Hubungi Saya</h2>
+            <div class="glass-card p-10 md:p-14 relative overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="text-left">
+                        <h3 class="text-2xl font-serif font-bold text-slate-800 mb-6">Mari Terhubung!</h3>
+                        <div class="space-y-4">
+                            <a href="https://instagram.com/avisa.dyn" target="_blank" class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold">Instagram</p>
+                                    <p class="font-bold text-slate-700">@avisa.dyn</p>
+                                </div>
+                            </a>
+                            <a href="https://wa.me/6281214558598" target="_blank" class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-green-100 text-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i class="fab fa-whatsapp text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold">WhatsApp</p>
+                                    <p class="font-bold text-slate-700">0812-1455-8598</p>
+                                </div>
+                            </a>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold">Email</p>
+                                    <p class="font-bold text-slate-700 text-sm">avisadeyana26@icloud.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form action="https://formspree.io/f/xvgoddzq" method="POST" class="space-y-4">
+                        <input type="text" name="name" placeholder="Nama Lengkap" required class="input-style text-left">
+                        <textarea name="message" rows="4" placeholder="Tulis pesan atau kesanmu..." required class="input-style text-left"></textarea>
+                        <button type="submit" class="w-full bg-ocean-blue text-white font-bold py-4 rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+                            Kirim Pesan <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-blue-50 text-center bg-white relative z-10">
+        <p class="font-serif text-3xl font-bold text-ocean-blue mb-4 tracking-tighter">Avisa Deyana.</p>
+        <p class="text-[10px] text-slate-400 uppercase tracking-[0.4em] font-bold">SMAN 1 SUBANG • CALON MAHASISWA IPB • 2026</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('fish-canvas');
+        const ctx = canvas.getContext('2d');
+        let mouse = { x: -100, y: -100 };
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        class Fish {
+            constructor() { this.init(); }
+            init() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 3;
+                this.speed = Math.random() * 2 + 1;
+                this.angle = Math.random() * Math.PI * 2;
+                this.color = `rgba(0, 119, 182, ${Math.random() * 0.2 + 0.05})`;
+            }
+            update() {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 200) {
+                    const targetAngle = Math.atan2(dy, dx);
+                    this.angle += (targetAngle - this.angle) * 0.05;
+                    this.x += Math.cos(this.angle) * (this.speed * 1.5);
+                    this.y += Math.sin(this.angle) * (this.speed * 1.5);
+                } else {
+                    this.angle += (Math.random() - 0.5) * 0.1;
+                    this.x += Math.cos(this.angle) * this.speed;
+                    this.y += Math.sin(this.angle) * this.speed;
+                }
+                if (this.x < -50) this.x = canvas.width + 50;
+                if (this.x > canvas.width + 50) this.x = -50;
+                if (this.y < -50) this.y = canvas.height + 50;
+                if (this.y > canvas.height + 50) this.y = -50;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size * 2, this.size, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const fishes = Array.from({ length: 40 }, () => new Fish());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fishes.forEach(f => { f.update(); f.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
